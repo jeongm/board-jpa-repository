@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../resources/static/style.css">
+  <title>Login</title>
+</head>
+<body>
+<h1 th:text="${#messages.msg('login')}"></h1>
+  <form th:method="post" th:action="@{/login}" th:object="${loginRequest}">
+    <table class="user">
+      <tbody>
+      <tr>
+        <th th:text="${#messages.msg('user.id')}"></th>
+        <td>
+          <p>
+            <input type="text" name="userId" placeholder="회원아이디" />
+          <p th:each="item : ${#fields.errors('userId')}" th:text="${item}" class="error-message"/>
+          </p></td>
+      </tr>
+      <tr>
+        <th th:text="${#messages.msg('user.password')}"></th>
+        <td>
+          <p>
+            <input  type="password" name="userPassword" placeholder="비밀번호" />
+          <p th:each="item : ${#fields.errors('userPassword')}" th:text="${item}" class="error-message" />
+          </p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <p th:if="${not #strings.isEmpty(message)}" th:text="${message}" class="error-message" ></p>
+    <p><button type="submit"><span th:text="${#messages.msg('login.button')}"/></button></p>
+  </form>
+
+<p>
+  <button type="button" onclick="location.href=location.pathname + '?locale=ko'"><span th:text="${#messages.msg('korean')}"/></button>
+  <button type="button" onclick="location.href=location.pathname +'?locale=en'"><span th:text="${#messages.msg('english')}"/></button>
+</p>
+</body>
+</html>

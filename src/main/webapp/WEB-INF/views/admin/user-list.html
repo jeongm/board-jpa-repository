@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../resources/static/style.css">
+    <title th:text="user-list"></title>
+</head>
+<body>
+    <h1 th:text="${#messages.msg('admin.user-list')}"></h1>
+    <table>
+        <thead>
+            <tr>
+                <th th:text="${#messages.msg('user.id')}"></th>
+                <th th:text="${#messages.msg('user.id')}"></th>
+                <th th:text="${#messages.msg('detail')}"></th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr th:each="item : ${userList}">
+                    <td th:text="${item.userNumber}"></td>
+                    <td th:text="${item.userId}"></td>
+                    <td>
+                        <a th:href="@{/admin/user-view(userId=${item.userId})}" th:text="${#messages.msg('view')}"></a>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+    <p ><a href="/admin" th:text="${#messages.msg('list')}"></a>&nbsp;<a href="/logout" th:text="${#messages.msg('logout')}"></a></p>
+</body>
+</html>

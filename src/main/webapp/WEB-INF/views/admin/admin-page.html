@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../resources/static/style.css">
+    <title>관라지 화면</title>
+</head>
+<body>
+<h1 th:text="${#messages.msg('admin-page')}"></h1>
+    <p><a href="/admin/user-list" th:text="${#messages.msg('user-list')}"></a></p>
+    <p><a href="/admin/user-register" th:text="${#messages.msg('user-register')}"></a></p>
+    <p><a href="/logout" th:text="${#messages.msg('logout')}"></a></p>
+</body>
+</html>

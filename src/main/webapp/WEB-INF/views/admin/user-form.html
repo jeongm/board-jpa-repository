@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../resources/static/style.css">
+  <title th:text="${#messages.msg('admin.user-register')}"></title>
+</head>
+<body>
+<h1 th:text="${#messages.msg('admin.user-register')}"></h1>
+  <form method="post" th:action="@{${user.userId == null ? '/admin/user-register' : '/admin/user-update?userId='+user.userId}}" th:object="${user}" enctype="multipart/form-data">
+    <table class="user">
+      <tbody>
+      <tr>
+        <th th:text="${#messages.msg('user.id')}"></th>
+        <td><input type="text" th:field="*{userId}" required></td>
+      </tr>
+      <tr>
+        <th th:text="${#messages.msg('user.password')}"></th>
+        <td><input type="text" th:field="*{userPassword}" required></td>
+      </tr>
+      <tr>
+        <th th:text="${#messages.msg('user.name')}"></th>
+        <td><input type="text" th:field="*{userName}" required></td>
+      </tr>
+      <tr>
+        <th th:text="${#messages.msg('user.profileimg')}"></th>
+        <td><input type="file" th:field="*{userProfileFileName}" required></td>
+      </tr>
+      </tbody>
+    </table>
+    <p>
+      <button type="submit" th:text="${user.userId == null ? #messages.msg('register'):#messages.msg('update')}"></button>
+    </p>
+  </form>
+</body>
+</html>

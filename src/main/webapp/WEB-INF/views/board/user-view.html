@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" ><head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../resources/static/style.css">
+    <title>사용자-조회</title>
+</head>
+<body>
+  <h1>사용자 조회</h1>
+  <table class="user">
+    <tbody>
+<!--      <c:if test="${managerId eq postId}">-->
+        <tr>
+          <th th:text="${#messages.msg('user.id')}"></th>
+          <td th:text="${user.userId}"></td>
+        </tr>
+        <tr>
+          <th th:text="${#messages.msg('user.password')}"></th>
+          <td th:text="${user.userPassword}"></td>
+        </tr>
+<!--      </c:if>-->
+      <tr>
+        <th th:text="${#messages.msg('user.name')}"></th>
+        <td th:text="${user.userName}"></td>
+      </tr>
+      <tr>
+        <th th:text="${#messages.msg('user.profileimg')}"></th>
+        <td th:text="${user.userProfileFileName}"></td>
+      </tr>
+    </tbody>
+  </table>
+<!--  <c:choose>-->
+<!--    <c:when test="${managerId eq postId}">-->
+      <p><a href="/admin/user-list" th:text="${#messages.msg('user-list')}"></a> <a th:href="@{/admin/user-update(userId=${user.userId})}" th:text="${#messages.msg('update')}"></a></p>
+      <form method="post" th:action="@{/admin/user-delete(userId=${user.postId})}">
+        <p><button type="submit"><span th:text="${#messages.msg('delete')}"/></button></p>
+      </form>
+<!--    </c:when>-->
+<!--    <c:otherwise>-->
+      <p><a href="/board/post-list" th:text="${#messages.msg('post-list')}"></a></p>
+<!--    </c:otherwise>-->
+<!--  </c:choose>-->
+</body>
+</html>

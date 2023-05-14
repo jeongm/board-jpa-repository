@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../resources/static/style.css">
+  <title th:text="${#messages.msg('post-list')}"></title>
+</head>
+<body>
+  <h1 th:text="${#messages.msg('post-list')}"></h1>
+  <table>
+    <thead>
+    <tr>
+      <th th:text="${#messages.msg('post.id')}"></th>
+      <th th:text="${#messages.msg('post.title')}"></th>
+      <th th:text="${#messages.msg('post.writer')}"></th>
+      <th th:text="${#messages.msg('post.write-time')}"></th>
+      <th th:text="${#messages.msg('post.view-count')}"></th>
+      <th th:text="${#messages.msg('view')}"></th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr th:each="item : ${postList}">
+        <td th:text="${item.postId}"></td>
+        <td th:text="${item.title}"></td>
+        <td th:text="${item.writeUserId}"></td>
+        <td th:text="${item.createAt}"></td>
+        <td>${post.getViewCount()}</td>
+        <td><a th:href="@{/board/post-view?postId=${item.postId}}" th:text="${#messages.msg('view')}"></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <p><a href="/board" th:text="${#messages.msg('list')}"></a></p>
+  <p><a href="/logout" th:text="${#messages.msg('logout')}"></a></p>
+</body>
+</html>

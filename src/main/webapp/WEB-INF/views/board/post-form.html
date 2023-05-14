@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../resources/static/style.css">
+  <title ></title>
+</head>
+<body>
+  <h1 th:text="${#messages.msg('post')}"> </h1>
+
+  <div class = "form-wrap" style="width: 100%;">
+    <form method="post" th:action="@{${post.postId == null ? '/board/post-write' : '/board/post-update'}}" th:object="${post}" >
+      <table>
+        <tbody>
+        <tr>
+          <th th:text="${#messages.msg('post.writer')}"></th>
+          <td><input type="text" th:field="*{writerId}" readonly></td>
+        </tr>
+        <tr>
+          <th th:text="${#messages.msg('post.title')}"></th>
+          <td><input type="text" th:field="*{title}" placeholder="글 제목" required></td>
+        </tr>
+        <tr>
+            <th th:text="${#messages.msg('post.content')}"></th>
+          <td><textarea name="content"  th:field="*{content}" placeholder="글 내용" style="height: 350px; width: 100%" required></textarea></td>
+        </tr>
+        </tbody>
+      </table>
+      <button>
+          <span th:text="${postId == null ? 'register': 'update'}"></span>
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>

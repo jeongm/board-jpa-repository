@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../resources/static/style.css">
+    <title><fmt:message key="post-view"/></title>
+</head>
+<body>
+  <h1 th:text="${#messages.msg('post-view')}"></h1>
+  <table>
+    <tbody>
+    <tr>
+      <th th:text="${#messages.msg('post.writer')}"></th>
+      <td><a href="/user-info?userId=${post.writer}" th:text="${#messages.msg('post.writer')}"></a></td>
+      <th th:text="${#messages.msg('post.view-count')}"></th>
+      <td>${post.viewCount}</td>
+    </tr>
+      <tr>
+        <th th:text="${#messages.msg('post.title')}"></th>
+        <td colspan="3">${post.title}</td>
+      </tr>
+      <tr>
+        <th th:text="${#messages.msg('post.content')}"></th>
+        <td colspan="3">${post.content}</td>
+      </tr>
+
+    </tbody>
+  </table>
+  <p><a href="/user/post-list" th:text="${#messages.msg('post-list')}"></a>
+<!--    <c:if test="${postId eq post.writeUserId}">-->
+      <a th:href="@{/user/post-update?postId=${post.postId}}" th:text="${#messages.msg('update')}"></a>
+<!--    </c:if>-->
+    </p>
+<!--  <c:if test="${postId eq post.writeUserId}">-->
+    <form method="post" th:action="@{/board/post-delete?postId=${post.postId}}">
+      <button type="submit"><span th:text="${#messages.msg('delete')}"/></button>
+    </form>
+<!--  </c:if>-->
+</body>
+</html>

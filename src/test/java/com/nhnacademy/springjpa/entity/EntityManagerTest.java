@@ -1,4 +1,4 @@
-package entity;
+package com.nhnacademy.springjpa.entity;
 
 import com.nhnacademy.springjpa.config.RootConfig;
 import com.nhnacademy.springjpa.config.WebConfig;
@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,16 +33,19 @@ public class EntityManagerTest {
     @Test
     public void test(){
         User user0 = User.builder()
+                .userNumber(2L)
                 .userId("user0")
                 .password("user0")
                 .age(22)
                 .name("user0name")
+                .post(null)
+                .createdAt(LocalDateTime.now())
                 .build();
 
         entityManager.persist(user0);
         entityManager.flush();
 
-        User user2 = entityManager.find(User.class, "user0");
+        User user2 = entityManager.find(User.class, 2L);
 
         assertThat(user2).isEqualTo(user0);
     }

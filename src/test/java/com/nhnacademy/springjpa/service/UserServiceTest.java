@@ -1,21 +1,24 @@
-package com.nhnacademy.springjpa.repository;
+package com.nhnacademy.springjpa.service;
 
 import com.nhnacademy.springjpa.config.RootConfig;
 import com.nhnacademy.springjpa.config.WebConfig;
 import com.nhnacademy.springjpa.domain.UserDto;
-import com.nhnacademy.springjpa.entity.User;
+import com.nhnacademy.springjpa.domain.UserNotDetail;
+import com.nhnacademy.springjpa.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
@@ -23,38 +26,46 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextHierarchy({
         @ContextConfiguration(classes = RootConfig.class),
         @ContextConfiguration(classes = WebConfig.class)
+
 })
-class UserRepositoryTest {
+class UserServiceTest {
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
 
     @Test
-    void testFindByUserId() {
-        UserDto user1 = userRepository.findByUserId("admin");
-        assertThat(user1.getUserId()).isEqualTo("admin");
+    void existsUserById() {
+        assertThat(userService.existsUserByUserId("admin")).isTrue();
     }
 
     @Test
-    void testExistsByUserIdAndPassword() {
-        boolean match = userRepository.existsByUserIdAndPassword("admin","12345");
-        assertThat(match).isTrue();
+    void getUserByUserId() {
+        UserDto user = userService.getUserByUserId("admin");
+        assertThat(user.getUserId()).isEqualTo("admin");
     }
 
     @Test
-    void testSave() {
-        User user1 = User.builder()
-                .userNumber(4L)
-                .userId("user1")
-                .password("user1")
-                .age(23)
-                .name("user1name")
-                .createdAt(LocalDateTime.now())
-                .build();
-        userRepository.saveAndFlush(user1);
-        UserDto user2 = userRepository.findByUserId("user1");
-        assertThat(user2.getUserId()).isEqualTo(user1.getUserId());
+    void getUsers() {
+        Pageable pageable = null;
+        List<UserNotDetail> users = userService.getUsers(pageable);
+        assertThat(users.size()).isEqualTo(6);
 
     }
 
+    @Test
+    void saveAndUpdateUser() {
+
+    }
+
+    @Test
+    void deleteUser() {
+    }
+
+    @Test
+    void matches() {
+        boolean matchesResult = userService.matches("admin","12345");
+        assertThat(matchesResult).isTrue();
+    }
 }

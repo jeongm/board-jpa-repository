@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../resources/static/style.css">
+  <title th:text="${#messages.msg('user-page')}"></title>
+</head>
+<body>
+<h1 th:text="${#messages.msg('user-page')}"></h1>
+<p><a th:href="@{/board/post-list}" th:text="${#messages.msg('post-list')}"></a></p>
+<p><a th:href="@{/board/post-write}" th:text="${#messages.msg('post-register')}"></a></p>
+<p><a th:href="@{/logout}" th:text="${#messages.msg('logout')}"></a></p>
+
+</body>
+</html>

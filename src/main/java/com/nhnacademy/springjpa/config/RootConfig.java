@@ -1,7 +1,6 @@
 package com.nhnacademy.springjpa.config;
 
 import com.nhnacademy.springjpa.Base;
-import com.nhnacademy.springjpa.repository.UserRepository;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -45,8 +44,7 @@ public class RootConfig {
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setBasename("message");
-//        messageSource.setBasenames("message", "error");
+        messageSource.setBasename("messages");
 
         return messageSource;
     }

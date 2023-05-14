@@ -1,4 +1,4 @@
-package entity;
+package com.nhnacademy.springjpa.entity;
 
 import com.nhnacademy.springjpa.config.RootConfig;
 import com.nhnacademy.springjpa.config.WebConfig;
